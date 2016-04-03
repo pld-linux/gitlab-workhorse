@@ -2,16 +2,16 @@
 # Conditional build:
 %bcond_with systemd
 
-%define pkg_version 0.6.5-8a339b468723d371ab408b528c5882481247f75e
 Summary:	An HTTP daemon that serves Git clients
 Name:		gitlab-workhorse
-Version:	0.6.5
+Version:	0.7.1
 Release:	0.1
 License:	MIT
 Group:		Development/Building
-URL:		https://gitlab.com/gitlab-org/gitlab-workhorse
-Source0:	%{name}-%{pkg_version}.tar.gz
+Source0:	https://gitlab.com/gitlab-org/gitlab-workhorse/repository/archive.tar.gz?ref=v%{version}&/%{name}-%{version}.tar.gz
+# Source0-md5:	f177e0c4585eff6050e5fb0a0f7b4ff7
 Source1:	%{name}.service
+URL:		https://gitlab.com/gitlab-org/gitlab-workhorse
 BuildRequires:	git-core
 BuildRequires:	golang
 %{?with_systemd:BuildRequires:	systemd-units}
@@ -26,7 +26,8 @@ authentication and authorization logic is still handled by the GitLab
 Rails app.
 
 %prep
-%setup -q -n %{name}-%{pkg_version}
+%setup -qc
+mv %{name}-v%{version}-*/* .
 
 %build
 %{__make}
