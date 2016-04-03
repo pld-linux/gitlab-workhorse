@@ -15,7 +15,7 @@ URL:		https://gitlab.com/gitlab-org/gitlab-workhorse
 BuildRequires:	git-core
 BuildRequires:	golang
 %{?with_systemd:BuildRequires:	systemd-units}
-Obsoletes:	gitlab-git-http-server < %{version}-%{release}
+Obsoletes:	gitlab-git-http-server <= 0.3.0
 Requires(pre):	gitlab-common
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
