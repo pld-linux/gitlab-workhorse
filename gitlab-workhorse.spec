@@ -1,7 +1,7 @@
 Summary:	An HTTP daemon that serves Git clients
 Name:		gitlab-workhorse
 Version:	0.7.1
-Release:	0.4
+Release:	0.5
 License:	MIT
 Group:		Development/Building
 # md5 deliberately omitted until this package is useful

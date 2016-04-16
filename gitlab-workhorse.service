@@ -5,10 +5,10 @@ PartOf=gitlab-ce.target
 
 [Service]
 Type=simple
-User=gitlab
-Group=gitlab
-WorkingDirectory=/srv/www/vhosts/gitlab-ce/
-ExecStart=/usr/sbin/gitlab-workhorse -listenUmask 0 -listenNetwork unix -listenAddr /srv/www/vhosts/gitlab-ce/tmp/sockets/gitlab-workhorse.socket -authBackend http://127.0.0.1:3003 -authSocket /srv/www/vhosts/gitlab-ce/tmp/sockets/puma.sock
+User=git
+Group=git
+WorkingDirectory=/var/lib/gitlab
+ExecStart=/usr/sbin/gitlab-workhorse -listenUmask 0 -listenNetwork unix -listenAddr /run/gitlab/gitlab-workhorse.socket -authBackend http://127.0.0.1:3003 -authSocket /run/gitlab/puma.sock
 Restart=on-failure
 
 [Install]
