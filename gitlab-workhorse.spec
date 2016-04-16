@@ -5,18 +5,17 @@
 Summary:	An HTTP daemon that serves Git clients
 Name:		gitlab-workhorse
 Version:	0.7.1
-Release:	0.1
+Release:	0.2
 License:	MIT
 Group:		Development/Building
+# md5 deliberately omitted until this package is useful
 Source0:	https://gitlab.com/gitlab-org/gitlab-workhorse/repository/archive.tar.gz?ref=v%{version}&/%{name}-%{version}.tar.gz
-# Source0-md5:	f177e0c4585eff6050e5fb0a0f7b4ff7
 Source1:	%{name}.service
 URL:		https://gitlab.com/gitlab-org/gitlab-workhorse
 BuildRequires:	git-core
 BuildRequires:	golang
 %{?with_systemd:BuildRequires:	systemd-units}
 Obsoletes:	gitlab-git-http-server <= 0.3.0
-Requires(pre):	gitlab-common
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
