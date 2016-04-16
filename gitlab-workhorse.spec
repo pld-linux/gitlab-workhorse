@@ -1,11 +1,7 @@
-#
-# Conditional build:
-%bcond_with systemd
-
 Summary:	An HTTP daemon that serves Git clients
 Name:		gitlab-workhorse
 Version:	0.7.1
-Release:	0.2
+Release:	0.3
 License:	MIT
 Group:		Development/Building
 # md5 deliberately omitted until this package is useful
@@ -33,15 +29,14 @@ mv %{name}-v%{version}-*/* .
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -D %{name} $RPM_BUILD_ROOT%{_sbindir}/%{name}
-%if %{with systemd}
-install -D %{SOURCE1} $RPM_BUILD_ROOT%{systemdunitdir}/%{name}.service
-%endif
+install -d $RPM_BUILD_ROOT{%{_sbindir}/%{name},%{systemdunitdir}}
+
+install -p %{name} $RPM_BUILD_ROOT%{_sbindir}/%{name}
+cp -p %{SOURCE1} $RPM_BUILD_ROOT%{systemdunitdir}/%{name}.service
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%if %{with systemd}
 %preun
 %systemd_preun %{name}.service
 
@@ -49,13 +44,10 @@ rm -rf $RPM_BUILD_ROOT
 %systemd_post %{name}.service
 
 %postun
-%systemd_postun_with_restart %{name}.service
-%endif
+%systemd_reload
 
 %files
 %defattr(644,root,root,755)
 %doc CHANGELOG README.md LICENSE
 %attr(755,root,root) %{_sbindir}/%{name}
-%if %{with systemd}
 %{systemdunitdir}/%{name}.service
-%endif
