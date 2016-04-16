@@ -1,7 +1,7 @@
 Summary:	An HTTP daemon that serves Git clients
 Name:		gitlab-workhorse
 Version:	0.7.1
-Release:	0.3
+Release:	0.4
 License:	MIT
 Group:		Development/Building
 # md5 deliberately omitted until this package is useful
@@ -29,7 +29,7 @@ mv %{name}-v%{version}-*/* .
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sbindir}/%{name},%{systemdunitdir}}
+install -d $RPM_BUILD_ROOT{%{_sbindir},%{systemdunitdir}}
 
 install -p %{name} $RPM_BUILD_ROOT%{_sbindir}/%{name}
 cp -p %{SOURCE1} $RPM_BUILD_ROOT%{systemdunitdir}/%{name}.service
