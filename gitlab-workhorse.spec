@@ -1,12 +1,13 @@
 Summary:	An HTTP daemon that serves Git clients
 Name:		gitlab-workhorse
 Version:	0.7.1
-Release:	0.6
+Release:	0.7
 License:	MIT
 Group:		Development/Building
 # md5 deliberately omitted until this package is useful
 Source0:	https://gitlab.com/gitlab-org/gitlab-workhorse/repository/archive.tar.gz?ref=v%{version}&/%{name}-%{version}.tar.gz
 Source1:	%{name}.service
+Patch0:		go.patch
 URL:		https://gitlab.com/gitlab-org/gitlab-workhorse
 BuildRequires:	git-core
 BuildRequires:	golang
@@ -23,6 +24,7 @@ Rails app.
 %prep
 %setup -qc
 mv %{name}-v%{version}-*/* .
+%patch0 -p1
 
 %build
 # make version similar when built from git:
