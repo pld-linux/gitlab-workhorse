@@ -1,7 +1,7 @@
 Summary:	An HTTP daemon that serves Git clients
 Name:		gitlab-workhorse
 Version:	0.7.1
-Release:	0.5
+Release:	0.6
 License:	MIT
 Group:		Development/Building
 # md5 deliberately omitted until this package is useful
@@ -25,7 +25,16 @@ Rails app.
 mv %{name}-v%{version}-*/* .
 
 %build
-%{__make}
+# make version similar when built from git:
+# Starting gitlab-workhorse v0.7.1-20160404.102052
+version=v%{version}-$(date -u +%%Y%%m%%d.%%H%%M%%S)
+
+%{__make} \
+	VERSION=$version
+
+# verify
+./gitlab-workhorse --version > v
+grep "$version" v
 
 %install
 rm -rf $RPM_BUILD_ROOT
