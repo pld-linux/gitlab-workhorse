@@ -1,7 +1,7 @@
 Summary:	An HTTP daemon that serves Git clients
 Name:		gitlab-workhorse
 Version:	0.7.11
-Release:	1
+Release:	2
 License:	MIT
 Group:		Development/Building
 Source0:	https://gitlab.com/gitlab-org/gitlab-workhorse/repository/archive.tar.gz?ref=v%{version}&/%{name}-%{version}.tar.gz

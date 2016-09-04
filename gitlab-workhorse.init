@@ -44,7 +44,10 @@ start() {
 	fi
 
 	msg_starting "GitLab Workhorse"
-	daemon --pidfile $pidfile --user $USER --makepid --chdir "$APP_PATH" --fork \
+	# initlog would cause fd1 and fd2 to be pipe
+	# those won't exist when workhorse tries to write to stdout causing it to abort with SIGPIPE
+	RC_LOGGING=no
+	daemon --pidfile $pidfile --user $USER --makepid --chdir "$APP_PATH" --redirfds --fork \
 		/usr/sbin/gitlab-workhorse -listenUmask 0 \
 			-authBackend http://localhost:8080 -authSocket /var/run/gitlab/gitlab.socket \
 			-documentRoot /usr/lib/gitlab/public \
