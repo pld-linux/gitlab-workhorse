@@ -1,11 +1,11 @@
 Summary:	An HTTP daemon that serves Git clients
 Name:		gitlab-workhorse
 Version:	0.7.11
-Release:	0.7
+Release:	1
 License:	MIT
 Group:		Development/Building
-# md5 deliberately omitted until this package is useful
 Source0:	https://gitlab.com/gitlab-org/gitlab-workhorse/repository/archive.tar.gz?ref=v%{version}&/%{name}-%{version}.tar.gz
+# Source0-md5:	182135dd2174198e33a2660a02545e4d
 Source1:	%{name}.service
 URL:		https://gitlab.com/gitlab-org/gitlab-workhorse
 BuildRequires:	git-core
@@ -46,11 +46,17 @@ cp -p %{SOURCE1} $RPM_BUILD_ROOT%{systemdunitdir}/%{name}.service
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%preun
-%systemd_preun %{name}.service
-
 %post
+/sbin/chkconfig --add %{name}
+%service %{name} restart
 %systemd_post %{name}.service
+
+%preun
+if [ "$1" = "0" ]; then
+	%service -q %{name} stop
+	/sbin/chkconfig --del %{name}
+fi
+%systemd_preun %{name}.service
 
 %postun
 %systemd_reload
