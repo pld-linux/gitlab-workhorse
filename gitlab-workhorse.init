@@ -30,7 +30,7 @@ USER=git
 APP_PATH=/usr/lib/gitlab
 
 # The PID and LOCK files
-pidfile=$APP_PATH/tmp/pids/gitlab-workhorse.pid
+pidfile=/var/run/gitlab/gitlab-workhorse.pid
 lockfile=/var/lock/subsys/gitlab-workhorse
 
 # Get service config - may override defaults
