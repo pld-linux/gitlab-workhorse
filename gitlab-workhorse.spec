@@ -9,7 +9,7 @@ Source0:	https://gitlab.com/gitlab-org/gitlab-workhorse/repository/archive.tar.g
 Source1:	%{name}.service
 URL:		https://gitlab.com/gitlab-org/gitlab-workhorse
 BuildRequires:	git-core
-BuildRequires:	golang >= 1.6
+BuildRequires:	golang >= 1.5
 %{?with_systemd:BuildRequires:	systemd-units}
 Obsoletes:	gitlab-git-http-server <= 0.3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
