@@ -46,6 +46,7 @@ start() {
 	msg_starting "GitLab Workhorse"
 	# initlog would cause fd1 and fd2 to be pipe
 	# those won't exist when workhorse tries to write to stdout causing it to abort with SIGPIPE
+	# http://lists.pld-linux.org/mailman/pipermail/pld-devel-en/2016-September/025111.html
 	RC_LOGGING=no
 	daemon --pidfile $pidfile --user $USER --makepid --chdir "$APP_PATH" --redirfds --fork \
 		/usr/sbin/gitlab-workhorse -listenUmask 0 \
