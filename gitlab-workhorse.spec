@@ -13,7 +13,7 @@ BuildRequires:	git-core
 BuildRequires:	golang >= 1.5
 BuildRequires:	rpmbuild(macros) >= 1.647
 Requires(post,preun):	/sbin/chkconfig
-Requires:	rc-scripts
+Requires:	rc-scripts >= 0.4.16
 Requires:	systemd-units >= 0.38
 Obsoletes:	gitlab-git-http-server <= 0.3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
