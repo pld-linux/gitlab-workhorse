@@ -1,11 +1,11 @@
 Summary:	An HTTP daemon that serves Git clients
 Name:		gitlab-workhorse
-Version:	0.8.2
+Version:	0.8.5
 Release:	1
 License:	MIT
 Group:		Development/Building
 Source0:	https://gitlab.com/gitlab-org/gitlab-workhorse/repository/archive.tar.gz?ref=v%{version}&/%{name}-%{version}.tar.gz
-# Source0-md5:	4f5a2b358a6e6c51216323459fd8854d
+# Source0-md5:	983d07b5c6f277dac7bc652d002f938b
 Source1:	%{name}.service
 Source2:	%{name}.init
 URL:		https://gitlab.com/gitlab-org/gitlab-workhorse
