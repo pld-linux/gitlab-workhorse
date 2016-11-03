@@ -1,0 +1,11 @@
+# configuration for gitlab-workhorse
+
+OPTIONS="-listenUmask 0 -authBackend http://localhost:8080 -authSocket /var/run/gitlab/gitlab.socket -documentRoot /usr/lib/gitlab/public"
+
+# Unix socket for Nginx
+# listen on unix socket (nginx)
+LISTEN_OPTIONS="-listenNetwork unix -listenAddr /var/run/gitlab/gitlab-workhorse.socket"
+
+# listen on tcp port (apache)
+# TCP for Apache
+#LISTEN_OPTIONS="-listenNetwork tcp -listenAddr 0.0.0.0:8181"

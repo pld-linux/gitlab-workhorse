@@ -8,10 +8,8 @@ Type=simple
 User=git
 Group=git
 WorkingDirectory=/usr/lib/gitlab
-# listen on unix socket (nginx)
-ExecStart=/usr/sbin/gitlab-workhorse -listenUmask 0 -authBackend http://localhost:8080 -authSocket /var/run/gitlab/gitlab.socket -documentRoot /usr/lib/gitlab/public -listenNetwork unix -listenAddr /var/run/gitlab/gitlab-workhorse.socket
-# listen on tcp port (apache)
-#ExecStart=/usr/sbin/gitlab-workhorse -listenUmask 0 -authBackend http://localhost:8080 -authSocket /var/run/gitlab/gitlab.socket -documentRoot /usr/lib/gitlab/public -listenNetwork tcp  -listenAddr 0.0.0.0:8181
+EnvironmentFile=/etc/sysconfig/gitlab-workhorse
+ExecStart=/usr/sbin/gitlab-workhorse $OPTIONS $LISTEN_OPTIONS
 Restart=on-failure
 
 [Install]

@@ -49,10 +49,7 @@ start() {
 	# http://lists.pld-linux.org/mailman/pipermail/pld-devel-en/2016-September/025111.html
 	RC_LOGGING=no
 	daemon --pidfile $pidfile --user $USER --makepid --chdir "$APP_PATH" --redirfds --fork \
-		/usr/sbin/gitlab-workhorse -listenUmask 0 \
-			-authBackend http://localhost:8080 -authSocket /var/run/gitlab/gitlab.socket \
-			-documentRoot /usr/lib/gitlab/public \
-			-listenNetwork unix -listenAddr /var/run/gitlab/gitlab-workhorse.socket
+		/usr/sbin/gitlab-workhorse $OPTIONS $LISTEN_OPTIONS
 	RETVAL=$?
 	[ $RETVAL -eq 0 ] && touch $lockfile
 }

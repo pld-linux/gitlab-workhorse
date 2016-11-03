@@ -8,6 +8,7 @@ Source0:	https://gitlab.com/gitlab-org/gitlab-workhorse/repository/archive.tar.g
 # Source0-md5:	983d07b5c6f277dac7bc652d002f938b
 Source1:	%{name}.service
 Source2:	%{name}.init
+Source3:	%{name}.sysconfig
 URL:		https://gitlab.com/gitlab-org/gitlab-workhorse
 BuildRequires:	git-core
 BuildRequires:	golang >= 1.5
@@ -42,11 +43,12 @@ grep "$version" v
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sbindir},%{systemdunitdir},/etc/rc.d/init.d}
+install -d $RPM_BUILD_ROOT{%{_sbindir},%{systemdunitdir},/etc/{rc.d/init.d,sysconfig}}
 
 install -p %{name} $RPM_BUILD_ROOT%{_sbindir}/%{name}
 cp -p %{SOURCE1} $RPM_BUILD_ROOT%{systemdunitdir}/%{name}.service
-cp -p %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/%{name}
+install -p %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/%{name}
+cp -p %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/%{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -69,6 +71,7 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc CHANGELOG README.md LICENSE
+%config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/%{name}
 %attr(754,root,root) /etc/rc.d/init.d/%{name}
 %attr(755,root,root) %{_sbindir}/%{name}
 %{systemdunitdir}/%{name}.service
