@@ -1,11 +1,11 @@
-Summary:	An HTTP daemon that serves Git clients
+Summary:	Handles slow HTTP requests for GitLab
 Name:		gitlab-workhorse
-Version:	1.0.0
+Version:	1.0.1
 Release:	1
 License:	MIT
-Group:		Development/Building
+Group:		Networking/Daemons/HTTP
 Source0:	https://gitlab.com/gitlab-org/gitlab-workhorse/repository/archive.tar.bz2?ref=v%{version}&/%{name}-%{version}.tar.bz2
-# Source0-md5:	b850a73be788189ea184c2b98c84aea8
+# Source0-md5:	23f922264b28f0eaf20404c41451e494
 Source1:	%{name}.service
 Source2:	%{name}.init
 Source3:	%{name}.sysconfig
@@ -20,10 +20,9 @@ Obsoletes:	gitlab-git-http-server <= 0.3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-gitlab-git-http-server was designed to unload Git HTTP traffic from
-the GitLab Rails app (Unicorn) to a separate daemon. All
-authentication and authorization logic is still handled by the GitLab
-Rails app.
+Gitlab-workhorse is a smart reverse proxy for GitLab. It handles
+"large" HTTP requests such as file downloads, file uploads, Git
+push/pull and Git archive downloads.
 
 %prep
 %setup -qc
