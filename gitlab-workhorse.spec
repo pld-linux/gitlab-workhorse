@@ -1,11 +1,11 @@
 Summary:	Handles slow HTTP requests for GitLab
 Name:		gitlab-workhorse
-Version:	1.2.1
+Version:	1.3.0
 Release:	1
 License:	MIT
 Group:		Networking/Daemons/HTTP
 Source0:	https://gitlab.com/gitlab-org/gitlab-workhorse/repository/archive.tar.bz2?ref=v%{version}&/%{name}-%{version}.tar.bz2
-# Source0-md5:	bd9d321ab699f0b1db217e76dd28732d
+# Source0-md5:	502f83ac8a8813e4df654f038a45e643
 Source1:	%{name}.service
 Source2:	%{name}.init
 Source3:	%{name}.sysconfig
