@@ -1,17 +1,17 @@
 Summary:	Handles slow HTTP requests for GitLab
 Name:		gitlab-workhorse
-Version:	1.4.3
+Version:	3.3.0
 Release:	1
 License:	MIT
 Group:		Networking/Daemons/HTTP
 Source0:	https://gitlab.com/gitlab-org/gitlab-workhorse/repository/archive.tar.bz2?ref=v%{version}&/%{name}-%{version}.tar.bz2
-# Source0-md5:	e0f1fc8b517e73864ba953d5bb2e4d6d
+# Source0-md5:	8ab2d33d77402cb8dceed63abae55f5f
 Source1:	%{name}.service
 Source2:	%{name}.init
 Source3:	%{name}.sysconfig
 URL:		https://gitlab.com/gitlab-org/gitlab-workhorse
 BuildRequires:	git-core
-BuildRequires:	golang >= 1.5
+BuildRequires:	golang >= 1.8
 BuildRequires:	rpmbuild(macros) >= 1.647
 Requires(post,preun):	/sbin/chkconfig
 Requires:	rc-scripts >= 0.4.16
