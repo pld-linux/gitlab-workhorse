@@ -1,0 +1,13 @@
+--- gitlab-workhorse-3.3.1/Makefile~	2017-11-14 15:36:10.000000000 +0200
++++ gitlab-workhorse-3.3.1/Makefile	2017-12-17 20:55:39.919871923 +0200
+@@ -19,8 +19,8 @@
+ 	${GOBUILD} -o ${BUILD_DIR}/$@ ${PKG}
+ 
+ install: gitlab-workhorse gitlab-zip-cat gitlab-zip-metadata
+-	mkdir -p $(DESTDIR)${PREFIX}/bin/
+-	cd ${BUILD_DIR} && install gitlab-workhorse gitlab-zip-cat gitlab-zip-metadata ${DESTDIR}${PREFIX}/bin/
++	mkdir -p $(DESTDIR)${PREFIX}/sbin/
++	cd ${BUILD_DIR} && install gitlab-workhorse gitlab-zip-cat gitlab-zip-metadata ${DESTDIR}${PREFIX}/sbin/
+ 
+ ${BUILD_DIR}/_build:
+ 	mkdir -p $@/src/${PKG}

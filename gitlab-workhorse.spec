@@ -9,6 +9,7 @@ Source0:	https://gitlab.com/gitlab-org/gitlab-workhorse/repository/archive.tar.b
 Source1:	%{name}.service
 Source2:	%{name}.init
 Source3:	%{name}.sysconfig
+Patch0:		paths.patch
 URL:		https://gitlab.com/gitlab-org/gitlab-workhorse
 BuildRequires:	git-core
 BuildRequires:	golang >= 1.8
@@ -27,6 +28,7 @@ push/pull and Git archive downloads.
 %prep
 %setup -qc
 mv %{name}-v%{version}-*/* .
+%patch0 -p1
 
 %build
 # make version similar when built from git:
@@ -42,9 +44,12 @@ grep "$version" v
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sbindir},%{systemdunitdir},/etc/{rc.d/init.d,sysconfig}}
+install -d $RPM_BUILD_ROOT{%{systemdunitdir},/etc/{rc.d/init.d,sysconfig}}
 
-install -p %{name} $RPM_BUILD_ROOT%{_sbindir}/%{name}
+%{__make} install \
+	PREFIX=%{_prefix} \
+	DESTDIR=$RPM_BUILD_ROOT
+
 cp -p %{SOURCE1} $RPM_BUILD_ROOT%{systemdunitdir}/%{name}.service
 install -p %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/%{name}
 cp -p %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/%{name}
@@ -72,5 +77,7 @@ fi
 %doc CHANGELOG README.md LICENSE
 %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/%{name}
 %attr(754,root,root) /etc/rc.d/init.d/%{name}
-%attr(755,root,root) %{_sbindir}/%{name}
+%attr(755,root,root) %{_sbindir}/gitlab-workhorse
+%attr(755,root,root) %{_sbindir}/gitlab-zip-cat
+%attr(755,root,root) %{_sbindir}/gitlab-zip-metadata
 %{systemdunitdir}/%{name}.service
